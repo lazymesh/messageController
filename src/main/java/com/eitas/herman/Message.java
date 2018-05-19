@@ -5,16 +5,10 @@ package com.eitas.herman;
  */
 public class Message {
 
-    private final long id;
     private final String msg;
 
-    public Message(long id, String msg) {
-        this.id = id;
+    public Message(String msg) {
         this.msg = msg;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getMessage() {

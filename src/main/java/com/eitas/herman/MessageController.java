@@ -1,8 +1,9 @@
 package com.eitas.herman;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.Mapping.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -12,11 +13,15 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class MessageController {
 
-    private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+    @Bean
+    JedisConnectionFactory jedisConnectionFactory() {
+        return new JedisConnectionFactory();
+    }
 
-    @RequestMapping("/message")
-    public Message message(@RequestParam(value="message", defaultValue="no message") String msg) {
-        return new Message(counter.incrementAndGet(), String.format(template, msg));
+    private static final String template = "Hello, %s!";
+
+    @RequestMapping("/message/{msg}")
+    public Message message(@PathVariable(value="msg") String msg) {
+        return new Message(msg);
     }
 }
