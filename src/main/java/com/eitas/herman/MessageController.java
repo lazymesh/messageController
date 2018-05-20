@@ -19,7 +19,7 @@ public class MessageController {
     }
 
     @Autowired
-    YMLSource confSource = new YMLSource();
+    YMLSource confSource;
 
     @RequestMapping("/message/{msg}")
     public Message message(@PathVariable(value="msg") String msg) {

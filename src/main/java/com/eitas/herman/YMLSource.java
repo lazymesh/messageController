@@ -13,12 +13,11 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "text")
 public class YMLSource {
 
-    @Value("text.name") String name;
+    private String name;
 
-    @Value("text.match") String match;
+    private String match;
 
     public String getName() {
-        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO "+name);
         return name;
     }
 
