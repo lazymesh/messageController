@@ -23,6 +23,21 @@ public class MessageController {
 
     @RequestMapping("/message/{msg}")
     public Message message(@PathVariable(value="msg") String msg) {
-        return new Message(confSource.getName()+" "+msg+" "+confSource.getMatch());
+        return new Message(textMatching(msg));
+    }
+
+    private String textMatching(String msg){
+        if(msg.contains(confSource.getName()) && msg.contains(confSource.getMatch())){
+            return msg + " contains both";
+        }
+        else if(msg.contains(confSource.getName())){
+            return msg + " contains only name";
+        }
+        else if(msg.contains(confSource.getMatch())){
+            return msg + " contains only match";
+        }
+        else{
+            return msg + " doesn't contain any";
+        }
     }
 }
